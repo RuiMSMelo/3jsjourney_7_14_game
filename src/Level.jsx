@@ -1,6 +1,6 @@
 import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
-import { RigidBody } from '@react-three/rapier'
+import { CuboidCollider, RigidBody } from '@react-three/rapier'
 import { useState } from 'react'
 import { useMemo } from 'react'
 import { useRef } from 'react'
@@ -213,6 +213,12 @@ function Bounds({ length = 1 }) {
                     position={[0, 0.75, -(length * 4) + 2]}
                     scale={[4, 1.5, 0.3]}
                     receiveShadow
+                />
+                <CuboidCollider
+                    args={[2, 0.1, 2 * length]}
+                    position={[0, -0.1, -(length * 2) + 2]}
+                    restitution={0.2}
+                    friction={1}
                 />
             </RigidBody>
         </>
