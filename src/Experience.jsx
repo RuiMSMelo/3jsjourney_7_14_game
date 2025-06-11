@@ -11,7 +11,6 @@ export default function Experience() {
 
 			<Physics debug>
 				<Lights />
-
 				<Level />
 				<Player />
 			</Physics>
