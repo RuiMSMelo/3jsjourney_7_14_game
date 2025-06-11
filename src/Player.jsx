@@ -3,6 +3,7 @@ import { RigidBody } from '@react-three/rapier'
 export default function Player() {
 	return (
 		<RigidBody
+			canSleep={false}
 			colliders='ball'
 			restitution={0.2}
 			friction={1}
