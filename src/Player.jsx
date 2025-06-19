@@ -1,16 +1,15 @@
 import { useRapier, RigidBody } from '@react-three/rapier'
 import { useFrame } from '@react-three/fiber'
 import { useKeyboardControls } from '@react-three/drei'
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import * as THREE from 'three'
-import { useState } from 'react'
 
 export default function Player() {
     const body = useRef()
     const [subscribeKeys, getKeys] = useKeyboardControls()
     const { rapier, world } = useRapier()
 
-    const [smoothCameraPosition] = useState(() => new THREE.Vector3())
+    const [smoothCameraPosition] = useState(() => new THREE.Vector3(10, 10, 10))
     const [smoothCameraTarget] = useState(() => new THREE.Vector3())
 
     const jump = () => {
@@ -90,8 +89,8 @@ export default function Player() {
         smoothCameraPosition.lerp(cameraPosition, 5 * delta)
         smoothCameraTarget.lerp(cameraTarget, 5 * delta)
 
-        state.camera.position.copy(cameraPosition)
-        state.camera.lookAt(cameraTarget)
+        state.camera.position.copy(smoothCameraPosition)
+        state.camera.lookAt(smoothCameraTarget)
     })
 
     return (
