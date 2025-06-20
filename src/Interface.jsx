@@ -1,3 +1,3 @@
 export default function Interface() {
-    return null
+    return <div className='interface'></div>
 }
