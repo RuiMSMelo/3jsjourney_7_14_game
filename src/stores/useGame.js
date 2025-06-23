@@ -1,3 +1,4 @@
+import { startTransition } from 'react'
 import { create } from 'zustand'
 import { subscribeWithSelector } from 'zustand/middleware'
 
@@ -6,11 +7,16 @@ export default create(
         return {
             blocksCount: 3,
 
+            /* TIME */
+            startTime: 0,
+            endTime: 0,
+
             /* PHASES */
             phase: 'ready',
             start: () => {
                 set((state) => {
-                    if (state.phase === 'ready') return { phase: 'playing' }
+                    if (state.phase === 'ready')
+                        return { phase: 'playing', startTime: Date.now() }
 
                     return {}
                 })
@@ -25,7 +31,8 @@ export default create(
             },
             end: () => {
                 set((state) => {
-                    if (state.phase === 'playing') return { phase: 'ended' }
+                    if (state.phase === 'playing')
+                        return { phase: 'ended', endTime: Date.now() }
 
                     return {}
                 })
