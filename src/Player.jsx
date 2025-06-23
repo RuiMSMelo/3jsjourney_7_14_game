@@ -29,7 +29,21 @@ export default function Player() {
             body.current.applyImpulse({ x: 0, y: 0.5, z: 0 })
         }
     }
+
+    const reset = () => {
+        body.current.setTranslation({ x: 0, y: 1, z: 0 })
+        body.current.setLinvel({ x: 0, y: 0, z: 0 })
+        body.current.setAngvel({ x: 0, y: 0, z: 0 })
+    }
+
     useEffect(() => {
+        const unsubscribeReset = useGame.subscribe(
+            (state) => state.phase,
+            (value) => {
+                if (value === 'ready') reset()
+            }
+        )
+
         const unsubscribeJump = subscribeKeys(
             (state) => {
                 return state.jump
@@ -46,6 +60,7 @@ export default function Player() {
         return () => {
             unsubscribeJump()
             unsubscribeAny()
+            unsubscribeReset()
         }
     }, [])
 
