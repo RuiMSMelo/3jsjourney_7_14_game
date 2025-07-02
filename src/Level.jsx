@@ -29,7 +29,7 @@ export function BlockStart({ position = [0, 0, 0] }) {
 }
 
 export function BlockEnd({ position = [0, 0, 0] }) {
-    const hamburger = useGLTF('./hamburger.glb')
+    const hamburger = useGLTF(`${import.meta.env.BASE_URL}hamburger.glb`)
 
     // adding shadows to hamburguer
     hamburger.scene.children.forEach((mesh) => {
